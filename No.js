@@ -3,7 +3,7 @@ const {
     process,
     console,
 } = No.buildin;
-
+// No.js 文件中首先会获取刚才 C++ 层注册的各种底层能力，这里非常重要的一个地方，通过 V8 的能力在 C++ 层把 C++ 模块导出的功能引入了 JS 领域，从此 JS 层就强大了起来。其中最重要的是 loader 模块的功能，因为 No.js 需要初始化内置的各种 JS 模块，也就是 loaderNativeModule 函数的逻辑，这个函数会根据模块配置，加载所有内置 JS 模块的代码并执行，然后在 No.libs 对象中记录各个 JS 模块导出的功能，
 function loaderNativeModule() {
     const modules = [
         {
@@ -127,6 +127,7 @@ loaderNativeModule();
 if (process.isMainThread) {
     No.libs.module.load(process.argv[1]);
 } else {
+    // load并执行用户层代码
     No.libs.module.load("libs/worker/main.js");
     No.libs.module.load(process.argv[1]);
 }

@@ -134,7 +134,7 @@ namespace No {
         void Init(Isolate* isolate, Local<Object> target) {
             Environment * env = Environment::GetCurrent(isolate);
             Local<Context> context = env->GetContext();
-
+            // 创建一个新的对象
             Local<Object> obj = Object::New(isolate);
 
             SetFunction(context, obj, NewString(isolate, "cwd"), No::Util::NewFunctionTemplate(isolate, Cwd));

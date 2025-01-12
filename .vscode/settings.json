@@ -118,5 +118,6 @@
         "hash_map": "cpp",
         "hash_set": "cpp",
         "simd": "cpp"
-    }
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }
