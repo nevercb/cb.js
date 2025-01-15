@@ -81,10 +81,11 @@ void No::Core::Run(Environment * env) {
     std::string content = Loader::GetJsCode(filename); // debugload(filename);
     ScriptCompiler::Source script_source(NewString(isolate, content.c_str()), origin);
     
+    // 编译成的函数，会加一个No作为参数
     Local<String> params[] = {
         NewString(isolate, "No"),
     };
-    //     . Value
+    // Value
     // 在 V8 中，Value 是所有 JavaScript 值的基类，包括：
     // 基本值类型：String、Number、Boolean、Undefined、Null。
     // 复杂值类型：Object、Function、Array 等。
@@ -94,6 +95,8 @@ void No::Core::Run(Environment * env) {
     };
     // 执行 No.js 文件的代码，并传入 No 对象，在 JS 层可以访问 C++ 层导出的功能
     // 编译代码
+    // CompileFunction 会把我们传入的代码变成一个函数的形式，其中的形参由我们指定比如。
+    // function func(cb) {    cb();}
     Local<Function> func = ScriptCompiler::CompileFunction(context, &script_source, 1, params, 0, nullptr).ToLocalChecked();
     // 执行代码
     func->Call(context, context->Global(), 1, argv).ToLocalChecked();  

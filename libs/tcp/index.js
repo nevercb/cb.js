@@ -3,7 +3,6 @@ const {
 } = No.buildin;
 
 const { events, dns } = No.libs;
-
 // IPv4 Segment
 const v4Seg = '(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])';
 const v4Str = `(?:${v4Seg}\\.){3}${v4Seg}`;
